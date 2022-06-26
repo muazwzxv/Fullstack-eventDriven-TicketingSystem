@@ -8,3 +8,7 @@ app.listen(3000, () => {
   console.log("Listening to port 3000");
   console.log("Are you actually listening?");
 });
+
+app.get("/api/users/currentuser", (req, res) => {
+  res.send("Hello there");
+});
