@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/**
+build:
+  local:
+    # Prevent default behavior where skaffold tries to 
+    # push new image to registry after every change
+    push: false
+  artifacts: 
+    - image: muazwazir1/auth-ticketing
+      # Context means the directory associated with this artifacts
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
