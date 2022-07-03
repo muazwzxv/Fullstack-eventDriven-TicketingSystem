@@ -1,5 +1,6 @@
 import express from "express";
 import { json } from "body-parser";
+import "express-async-errors";
 import { currentUserRouter } from "./routes/current-user";
 import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
