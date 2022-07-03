@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { BadRequestError } from "../errors/bad-request";
-import { DatabaseConnecctionError } from "../errors/database-connection-error";
 import { RequestValidationError } from "../errors/request-validation-error";
 import { User } from "../models/user";
 
