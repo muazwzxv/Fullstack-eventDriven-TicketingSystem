@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mongo-depl
+spec:
+  replicas: 1
+
+  # Section that defines the app lable
+  # as key value store ['app' : demo-posts]
+  selector:
+    matchLabels:
+      app: auth-mongo
+
+  # This parts defines that the deployment should create pods
+  # for label ['app': demo-posts]
+  template:
+    metadata:
+      labels:
+        app: auth-mongo
+    spec: 
+      containers:
+        - name: auth-mongo
+          image: mongo
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: auth-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: auth-mongo
+  ports:
+    - name: auth-mongo-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
