@@ -4,6 +4,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
+import { errorHandler } from "./middlewares/error-handler";
 
 const app = express();
 app.use(json());
@@ -14,7 +15,10 @@ app.use(registerRouter);
 app.use(loginRouter);
 app.use(logoutRouter);
 
+// register error handler
+app.use(errorHandler);
+
 app.listen(3000, () => {
   console.log("Listening to port 3000");
-  console.log("Are you actually listening?");
+  console.log("Are you actually listening? for fuck sake");
 });
