@@ -1,14 +1,17 @@
 import mongoose from "mongoose";
 
+// type for creating an object
 interface UserAttrs {
   email: string;
   password: string;
 }
 
+// describe properties of a Model
 interface UserModel extends mongoose.Model<UserDoc> {
   build(attrs: UserAttrs): UserDoc;
 }
 
+// describe properties of a Document
 interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
