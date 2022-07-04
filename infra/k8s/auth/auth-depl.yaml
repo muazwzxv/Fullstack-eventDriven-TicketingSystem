@@ -21,6 +21,12 @@ spec:
       containers:
         - name: auth-ticketing
           image: muazwazir1/auth-ticketing:latest
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef: 
+                  name: jwt-secret
+                  key: JWT_KEY
 
 ---
 

@@ -35,6 +35,9 @@ app.all("*", async (req, res) => {
 app.use(errorHandler);
 
 const start = async () => {
+  // Ensure JWT_KEY env is defined
+  if (!process.env.JWT_KEY) throw new Error("Jwt must be defined");
+
   try {
     await mongoose.connect("mongodb://auth-mongo-clusterip-srv:27017/auth");
   } catch (err) {
