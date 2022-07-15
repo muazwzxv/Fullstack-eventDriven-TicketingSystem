@@ -4,6 +4,7 @@ import { User } from "../models/user";
 import { validateRequestMiddleware } from "../middlewares/validate-request";
 import { BadRequestError } from "../errors/bad-request";
 import jwt from "jsonwebtoken";
+import { Password } from "../util/password";
 
 const router = express.Router();
 
@@ -17,7 +18,10 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const userFound = await User.findOne({ email });
-    if (!userFound) throw new BadRequestError("user does not exist");
+    if (!userFound) throw new BadRequestError("Bad request");
+
+    const isMatch = await Password.compare(userFound.password, password);
+    if (!isMatch) throw new BadRequestError("Bad request");
 
     const userJwt = jwt.sign(
       {
@@ -31,7 +35,7 @@ router.post(
       jwt: userJwt,
     };
 
-    res.status(200);
+    res.status(200).send(userFound);
   }
 );
 
