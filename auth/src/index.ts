@@ -5,7 +5,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
 import { logoutRouter } from "./routes/logout";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandlerMiddleware } from "./middlewares/error-handler-middleware";
 import { NotFoundError } from "./errors/not-found-error";
 import mongoose from "mongoose";
 import cookieSession from "cookie-session";
@@ -32,7 +32,7 @@ app.all("*", async (req, res) => {
 });
 
 // register error handler
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 const start = async () => {
   // Ensure JWT_KEY env is defined
