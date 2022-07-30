@@ -1,5 +1,4 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import { authMiddleware } from "../middlewares/auth-middleware";
 import { currentUserMiddleware } from "../middlewares/currentuser-middleware";
 
